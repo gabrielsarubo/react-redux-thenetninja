@@ -1,5 +1,6 @@
 import React from 'react';
 import Ninjas from './Ninjas'
+import AddNinja from './AddNinja'
 import './App.css';
 
 class App extends React.Component {
@@ -11,12 +12,28 @@ class App extends React.Component {
       { name: "Luis Felipe", age: "15", belt: "red", id: 3 }
     ]
   }
+
+  addNinja = ninja => {
+    ninja.id = Math.random();
+    
+    // since i cant alter the current state, i need to create a new array w/ recently added ninja
+    // and THEN change the state by putting a new array of objects to that state
+
+    // taking the original array and spreading out into indivual objects
+    // and putting them indidually as new elements to a new array of ninjas
+    let ninjas = [...this.state.ninjas, ninja] 
+
+    this.setState({
+      ninjas: ninjas
+    })
+  }
   
   render() {
     return (
       <div className="App">
         <h1>Hello world!</h1>
 
+        <AddNinja addNinja={this.addNinja} />
         {/* Passing ninjas (an array inside the state of this class) as a prop */}
         <Ninjas ninjas={this.state.ninjas} />
       </div>
