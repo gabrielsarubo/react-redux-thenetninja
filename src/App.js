@@ -27,6 +27,16 @@ class App extends React.Component {
       ninjas: ninjas
     })
   }
+
+  deleteNinja = id => {
+    let ninjas = this.state.ninjas.filter(ninja => {
+      return ninja.id !== id
+    })
+
+    this.setState({
+      ninjas: ninjas
+    })
+  }
   
   render() {
     return (
@@ -35,7 +45,7 @@ class App extends React.Component {
 
         <AddNinja addNinja={this.addNinja} />
         {/* Passing ninjas (an array inside the state of this class) as a prop */}
-        <Ninjas ninjas={this.state.ninjas} />
+        <Ninjas deleteNinja={this.deleteNinja} ninjas={this.state.ninjas}  />
       </div>
     );
   }
